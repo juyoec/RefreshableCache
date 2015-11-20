@@ -22,7 +22,7 @@ import java.util.Random;
 /**
  * User: crassirostris
  * Date: 2015-10-14
- * Time: 오후 8:27
+ * Time: PM 8:27
  */
 @Slf4j
 public class ClusterCache extends RefreshableCache {

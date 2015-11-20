@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * User: crassirostris
  * Date: 2015-10-14
- * Time: 오후 7:54
+ * Time: PM 7:54
  */
 @Configuration
 @EnableCaching

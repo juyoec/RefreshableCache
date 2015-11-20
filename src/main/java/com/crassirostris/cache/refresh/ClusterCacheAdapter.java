@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * User: crassirostris
  * Date: 2015-11-06
- * Time: 오후 4:04
+ * Time: PM 4:04
  */
 @RestController
 public class ClusterCacheAdapter {

@@ -18,6 +18,10 @@ apply plugin: 'signing'
 sourceCompatibility = 1.8
 version = '1.8'
 
+tasks.withType(Compile) {
+    options.encoding = 'UTF-8'
+}
+
 task javadocJar(type: Jar) {
     classifier = 'javadoc'
     from javadoc
@@ -34,10 +38,10 @@ signing {
     sign configurations.archives
 }
 group = "com.crassirostris.cache"
-archivesBaseName = "RefreshCache"
+archivesBaseName = "RefreshableCache"
 version = "1.0.0"
 jar {
-    baseName = 'RefreshCache'
+    baseName = 'RefreshableCache'
     version =  '1.0.0-RELEASE'
 }
 uploadArchives {

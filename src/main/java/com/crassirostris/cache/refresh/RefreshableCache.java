@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * need regist BeanFactory
  * User: crassirostris
  * Date: 2015-10-14
- * Time: 오후 5:42
+ * Time: PM 5:42
  */
 @Slf4j
 public class RefreshableCache extends GuavaCache {

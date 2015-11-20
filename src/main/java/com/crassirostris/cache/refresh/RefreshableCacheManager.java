@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * User: crassirostris
  * Date: 2015-10-14
- * Time: 오후 6:27
+ * Time: PM 6:27
  */
 public class RefreshableCacheManager extends GuavaCacheManager {
 	// private override

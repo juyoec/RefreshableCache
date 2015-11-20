@@ -18,7 +18,7 @@ import java.util.Set;
  * create new instance that setted field (get BeanFactory)
  * User: crassirostris
  * Date: 2015-10-14
- * Time: 오후 6:04
+ * Time: PM 6:04
  */
 @Slf4j
 public class RefreshableCacheHelper {
