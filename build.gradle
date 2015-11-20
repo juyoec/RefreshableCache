@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+sourceCompatibility = 1.8
+version = '1.8'
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+artifacts {
+    archives javadocJar, sourcesJar
+}
+signing {
+    sign configurations.archives
+}
+group = "com.crassirostris.cache"
+archivesBaseName = "RefreshCache"
+version = "1.0.0"
+jar {
+    baseName = 'RefreshCache'
+    version =  '1.0.0-RELEASE'
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'RefreshableCache'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Use refreshable cache with GuavaCache'
+                url 'https://github.com/juyoec/RefreshableCache/wiki'
+
+                scm {
+                    connection 'https://github.com/juyoec/RefreshableCache.git'
+                    developerConnection 'https://github.com/juyoec/RefreshableCache.git'
+                    url 'https://github.com/juyoec/RefreshableCache.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'crassirostris'
+                        name 'crassirostris'
+                        email 'crassirostris@naver.com'
+                    }
+                }
+            }
+        }
+    }
+}
+repositories {
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'org.reflections:reflections:0.9.9'
+    compile 'com.google.guava:guava:18.0'
+    compile "org.projectlombok:lombok:1.16.6"
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework:spring-context-support'
+}
