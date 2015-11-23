@@ -37,7 +37,7 @@ artifacts {
 signing {
     sign configurations.archives
 }
-group = "com.crassirostris.cache"
+group = "com.github.crassirostris.cache"
 archivesBaseName = "RefreshableCache"
 version = "1.0.0"
 jar {
