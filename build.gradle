@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
@@ -32,14 +31,16 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 artifacts {
-    archives javadocJar, sourcesJar
+    archives jar
+    archives javadocJar
+    archives sourcesJar
 }
 signing {
     sign configurations.archives
 }
 group = "com.github.crassirostris.cache"
 archivesBaseName = "RefreshableCache"
-version = "1.0.0"
+version = "1.0.0-RELEASE"
 jar {
     baseName = 'RefreshableCache'
     version =  '1.0.0-RELEASE'
@@ -49,13 +50,17 @@ uploadArchives {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
                 authentication(userName: ossrhUsername, password: ossrhPassword)
             }
+/*
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }*/
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
+            configuration = configurations.archives
+
+
 
             pom.project {
                 name 'RefreshableCache'
@@ -68,20 +73,27 @@ uploadArchives {
                     connection 'https://github.com/juyoec/RefreshableCache.git'
                     developerConnection 'https://github.com/juyoec/RefreshableCache.git'
                     url 'https://github.com/juyoec/RefreshableCache.git'
+                    tag 'HEAD'
                 }
 
                 licenses {
                     license {
                         name 'The Apache License, Version 2.0'
                         url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
                     }
+                }
+
+                organization {
+                    name 'crassirostris'
+                    url 'https://github.com/juyoec/RefreshableCache/wiki'
                 }
 
                 developers {
                     developer {
                         id 'crassirostris'
                         name 'crassirostris'
-                        email 'crassirostris@naver.com'
+                        email 'crassirostris@gmail.com'
                     }
                 }
             }
